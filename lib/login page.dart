@@ -13,7 +13,7 @@ class LoginPage extends StatefulWidget {
 class _LoginPageState extends State<LoginPage> {
   final GlobalKey<FormState> _formKey = GlobalKey<FormState>();
   final TextEditingController _passwordController = TextEditingController();
-  final TextEditingController _phoneController = TextEditingController();
+  final TextEditingController _emailController = TextEditingController();
   bool _isPasswordVisible = false;
 
   @override
@@ -43,29 +43,6 @@ class _LoginPageState extends State<LoginPage> {
                   child: Column(
                     children: [
                       SizedBox(height: height * 0.1),
-                      // Container(
-                      //   height: height * 0.125,
-                      //   width: height * 0.125,
-                      //   decoration: BoxDecoration(
-                      //     color: Colors.white,
-                      //     borderRadius: BorderRadius.circular(26),
-                      //   ),
-                      //   child: const Center(
-                      //     child: Icon(
-                      //       Icons.cloud,
-                      //       size: 48,
-                      //       color: Colors.blue,
-                      //     ),
-                      //   ),
-                      // ),
-                      // const SizedBox(height: 5),
-                      // const Text(
-                      //   Constants.appName,
-                      //   style: TextStyle(
-                      //     fontWeight: FontWeight.w600,
-                      //     color: Colors.white,
-                      //   ),
-                      // ),
                     ],
                   ),
                 ),
@@ -157,17 +134,17 @@ class _LoginPageState extends State<LoginPage> {
     return Column(
       children: [
         TextFormField(
-          controller: _phoneController,
+          controller: _emailController,
           decoration: const InputDecoration(
-            labelText: 'Phone',
+            labelText: 'Email',
             border: OutlineInputBorder(),
-            prefixIcon: Icon(Icons.phone),
+            prefixIcon: Icon(Icons.email),
           ),
           validator: (value) {
             if (value!.isEmpty) {
-              return 'Please enter your Phone Number';
-            } else if (!RegExp(r'^[0-9]+$').hasMatch(value)) {
-              return 'Please enter a valid phone address';
+              return 'Please enter your Email';
+            } else if (!RegExp(r'^[\w-]+(\.[\w-]+)*@[\w-]+(\.[\w-]+)+$').hasMatch(value)) {
+              return 'Please enter a valid email address';
             }
             return null;
           },
@@ -214,7 +191,7 @@ class _LoginPageState extends State<LoginPage> {
               ? () {
                   Navigator.pushReplacement(
                     context,
-                    MaterialPageRoute(builder: (context) => const homepage()),
+                    MaterialPageRoute(builder: (context) => homepage()),
                   );
                 }
               : null,
@@ -233,7 +210,7 @@ class _LoginPageState extends State<LoginPage> {
         const SizedBox(height: 5),
         GestureDetector(
           onTap: () {
-            Get.to(const homepage());
+            Get.to(homepage());
           },
           child: RichText(
             text: TextSpan(
